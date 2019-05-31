@@ -1,11 +1,12 @@
 package com.sgcib;
 
 import com.sgcib.price.Price;
-import com.sgcib.price.UnitPrice;
+import com.sgcib.price.PriceFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 class CartBuilder {
 
@@ -16,20 +17,21 @@ class CartBuilder {
         class PriceBuilder {
 
             private BigDecimal value;
-            private Quantity quantity;
+            private BigDecimal quantity;
 
             PriceBuilder withPrice(BigDecimal value) {
                 this.value = value;
                 return this;
             }
 
-            PriceBuilder withQuantity(Quantity quantity) {
+            PriceBuilder withQuantity(BigDecimal quantity) {
                 this.quantity = quantity;
                 return this;
             }
 
             ProductBuilder and() {
-                return ProductBuilder.this.withPrice(new UnitPrice(value, quantity));
+                PriceFactory priceFactory = new PriceFactory();
+                return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity)));
             }
 
             Cart build() {

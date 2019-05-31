@@ -1,14 +1,12 @@
 package com.sgcib.price;
 
-import com.sgcib.Quantity;
-
 import java.math.BigDecimal;
 
-public class UnitPrice implements Price {
+class UnitPrice implements Price {
 
     private final BigDecimal value;
 
-    public UnitPrice(BigDecimal value, Quantity quantity) {
+    UnitPrice(BigDecimal value) {
         this.value = value;
     }
 

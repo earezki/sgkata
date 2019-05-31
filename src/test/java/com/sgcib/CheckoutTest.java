@@ -15,21 +15,21 @@ public class CheckoutTest {
     public void test_fixed_price() {
         Cart cart = new CartBuilder()
                 .withProduct().withName("Can of beans").withQuantity(new Quantity(1))
-                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new Quantity(1))
+                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new BigDecimal(1))
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("0.6"), totalPrice);
 
         cart = new CartBuilder()
                 .withProduct().withName("Can of beans").withQuantity(new Quantity(2))
-                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new Quantity(1))
+                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new BigDecimal(1))
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.2"), totalPrice);
 
         cart = new CartBuilder()
                 .withProduct().withName("Can of beans").withQuantity(new Quantity(3))
-                .withPrice().withPrice(new BigDecimal("0.7")).withQuantity(new Quantity(1))
+                .withPrice().withPrice(new BigDecimal("0.7")).withQuantity(new BigDecimal(1))
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("2.1"), totalPrice);
@@ -42,7 +42,7 @@ public class CheckoutTest {
     public void test_variable_product_for_a_price() {
         Cart cart = new CartBuilder()
                 .withProduct().withName("Can of beans").withQuantity(new Quantity(1))
-                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new Quantity(3))
+                .withPrice().withPrice(new BigDecimal("0.6")).withQuantity(new BigDecimal(3))
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.0"), totalPrice);
