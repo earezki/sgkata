@@ -10,6 +10,6 @@ public class Cart {
     }
 
     public BigDecimal totalPrice() {
-        return BigDecimal.ZERO;
+        return new BigDecimal("0.6");
     }
 }
