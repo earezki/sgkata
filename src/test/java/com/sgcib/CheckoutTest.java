@@ -79,9 +79,15 @@ public class CheckoutTest {
                 .withProduct().withName("Rice").withWeight(1, Weight.Unit.POUND)
                 .withPrice().withPrice(new BigDecimal("1.99")).withWeight(Weight.Unit.POUND)
                 .build();
-
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.99"), totalPrice);
+
+        cart = new CartBuilder()
+                .withProduct().withName("Rice").withWeight(4, Weight.Unit.OUNCE)
+                .withPrice().withPrice(new BigDecimal("1.99")).withWeight(Weight.Unit.POUND)
+                .build();
+        totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("0.4975"), totalPrice);
     }
 
 
