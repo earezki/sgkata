@@ -18,6 +18,7 @@ class CartBuilder {
 
             private BigDecimal value;
             private BigDecimal quantity;
+            private Weight.Unit unit;
 
             PriceBuilder withPrice(BigDecimal value) {
                 this.value = value;
@@ -37,11 +38,17 @@ class CartBuilder {
             Cart build() {
                 return and().and().build();
             }
+
+            PriceBuilder withWeight(Weight.Unit unit) {
+                this.unit = unit;
+                return null;
+            }
         }
 
         private String name;
         private Price price;
         private Quantity quantity;
+        private Weight weight;
 
         ProductBuilder withName(String name) {
             this.name = name;
@@ -60,6 +67,11 @@ class CartBuilder {
         ProductBuilder withQuantity(Quantity quantity) {
             this.quantity = quantity;
             return this;
+        }
+
+        PriceBuilder withWeight(Weight weight) {
+            this.weight = weight;
+            return null;
         }
 
         CartBuilder and() {

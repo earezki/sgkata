@@ -75,8 +75,8 @@ public class CheckoutTest {
     @Test
     public void test_wighted_price() {
         Cart cart = new CartBuilder()
-                .withProduct().withName("Rice").withWeight(new Kilo(1))
-                .withPrice().withPrice(new BigDecimal("1.0")).withWeight(Weight.KILO)
+                .withProduct().withName("Rice").withWeight(new Weight(1, Weight.Unit.POUND))
+                .withPrice(new BigDecimal("1.0")).withWeight(Weight.Unit.POUND)
                 .build();
 
         BigDecimal totalPrice = cart.totalPrice();
