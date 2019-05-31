@@ -4,11 +4,11 @@ import com.sgcib.price.Price;
 
 import java.math.BigDecimal;
 
-public class Quantity implements Measure {
+class Quantity implements Measure {
 
     private final int value;
 
-    public Quantity(int value) {
+    Quantity(int value) {
         this.value = value;
     }
 

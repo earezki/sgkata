@@ -14,7 +14,7 @@ public class Weight implements Measure {
     private final int value;
     private final Unit unit;
 
-    public Weight(int value, Unit unit) {
+    Weight(int value, Unit unit) {
         this.value = value;
         this.unit = unit;
     }

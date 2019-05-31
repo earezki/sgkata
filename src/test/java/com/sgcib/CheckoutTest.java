@@ -1,6 +1,5 @@
 package com.sgcib;
 
-import com.sgcib.measure.Quantity;
 import com.sgcib.measure.Weight;
 import org.junit.Test;
 
@@ -16,21 +15,21 @@ public class CheckoutTest {
     @Test
     public void test_fixed_price() {
         Cart cart = new CartBuilder()
-                .withProduct().withName("Can of beans").withQuantity(new Quantity(1))
+                .withProduct().withName("Can of beans").withQuantity(1)
                 .withPrice().withPrice(new BigDecimal("0.6"))
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("0.6"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Can of beans").withQuantity(new Quantity(2))
+                .withProduct().withName("Can of beans").withQuantity(2)
                 .withPrice().withPrice(new BigDecimal("0.6"))
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.2"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Can of beans").withQuantity(new Quantity(3))
+                .withProduct().withName("Can of beans").withQuantity(3)
                 .withPrice().withPrice(new BigDecimal("0.7"))
                 .build();
         totalPrice = cart.totalPrice();
@@ -43,28 +42,28 @@ public class CheckoutTest {
     @Test
     public void test_pack_products_for_a_price() {
         Cart cart = new CartBuilder()
-                .withProduct().withName("Cookies").withQuantity(new Quantity(3))
+                .withProduct().withName("Cookies").withQuantity(3)
                 .withPrice().withPrice(new BigDecimal("1.0")).withQuantity(new BigDecimal(3))
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.0"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Cookies").withQuantity(new Quantity(6))
+                .withProduct().withName("Cookies").withQuantity(6)
                 .withPrice().withPrice(new BigDecimal("1.0")).withQuantity(new BigDecimal(3))
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("2.0"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Cookies").withQuantity(new Quantity(4))
+                .withProduct().withName("Cookies").withQuantity(4)
                 .withPrice().withPrice(new BigDecimal("1.0")).withQuantity(new BigDecimal(3))
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("2.0"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Cookies").withQuantity(new Quantity(5))
+                .withProduct().withName("Cookies").withQuantity(5)
                 .withPrice().withPrice(new BigDecimal("1.0")).withQuantity(new BigDecimal(3))
                 .build();
         totalPrice = cart.totalPrice();
@@ -77,8 +76,8 @@ public class CheckoutTest {
     @Test
     public void test_wighted_price() {
         Cart cart = new CartBuilder()
-                .withProduct().withName("Rice").withWeight(new Weight(1, Weight.Unit.POUND))
-                .withPrice(new BigDecimal("1.0")).withWeight(Weight.Unit.POUND)
+                .withProduct().withName("Rice").withWeight(1, Weight.Unit.POUND)
+                .withPrice().withPrice(new BigDecimal("1.0")).withWeight(Weight.Unit.POUND)
                 .build();
 
         BigDecimal totalPrice = cart.totalPrice();
