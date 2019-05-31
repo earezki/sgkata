@@ -1,11 +1,10 @@
-package com.sgcib;
+package com.sgcib.measure;
 
 import com.sgcib.price.Price;
-import com.sgcib.price.UnitPrice;
 
 import java.math.BigDecimal;
 
-public class Quantity {
+public class Quantity implements Measure {
 
     private final int value;
 
@@ -13,7 +12,8 @@ public class Quantity {
         this.value = value;
     }
 
-    BigDecimal price(Price price) {
+    @Override
+    public BigDecimal price(Price price) {
         return price.price(new BigDecimal(this.value));
     }
 }

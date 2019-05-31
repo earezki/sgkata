@@ -1,7 +1,5 @@
 package com.sgcib.price;
 
-import com.sgcib.Quantity;
-
 import java.math.BigDecimal;
 
 class PackPrice implements Price {

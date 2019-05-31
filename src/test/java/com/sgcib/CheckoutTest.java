@@ -1,5 +1,7 @@
 package com.sgcib;
 
+import com.sgcib.measure.Quantity;
+import com.sgcib.measure.Weight;
 import org.junit.Test;
 
 import java.math.BigDecimal;

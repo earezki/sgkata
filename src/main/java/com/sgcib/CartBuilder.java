@@ -1,5 +1,8 @@
 package com.sgcib;
 
+import com.sgcib.measure.Measure;
+import com.sgcib.measure.Quantity;
+import com.sgcib.measure.Weight;
 import com.sgcib.price.Price;
 import com.sgcib.price.PriceFactory;
 
@@ -47,8 +50,7 @@ class CartBuilder {
 
         private String name;
         private Price price;
-        private Quantity quantity;
-        private Weight weight;
+        private Measure measure;
 
         ProductBuilder withName(String name) {
             this.name = name;
@@ -65,17 +67,17 @@ class CartBuilder {
         }
 
         ProductBuilder withQuantity(Quantity quantity) {
-            this.quantity = quantity;
+            this.measure = quantity;
             return this;
         }
 
         PriceBuilder withWeight(Weight weight) {
-            this.weight = weight;
+            this.measure = weight;
             return null;
         }
 
         CartBuilder and() {
-            return CartBuilder.this.withProduct(new Product(name, price, quantity));
+            return CartBuilder.this.withProduct(new Product(name, price, measure));
         }
     }
 
