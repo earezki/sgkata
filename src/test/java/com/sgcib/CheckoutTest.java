@@ -69,5 +69,19 @@ public class CheckoutTest {
         assertEquals(new BigDecimal("3.0"), totalPrice);
     }
 
+    /**
+     * $1.99/pound (so what does 4 ounces cost?)
+     */
+    @Test
+    public void test_wighted_price() {
+        Cart cart = new CartBuilder()
+                .withProduct().withName("Rice").withWeight(new Kilo(1))
+                .withPrice().withPrice(new BigDecimal("1.0")).withWeight(Weight.KILO)
+                .build();
+
+        BigDecimal totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("1.99"), totalPrice);
+    }
+
 
 }
