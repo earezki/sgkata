@@ -15,6 +15,6 @@ public class Product {
     }
 
     BigDecimal price() {
-        return quantity.price(new BigDecimal("0.6"));
+        return quantity.price(price);
     }
 }

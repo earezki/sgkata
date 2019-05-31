@@ -10,7 +10,7 @@ public class Quantity {
         this.value = value;
     }
 
-    BigDecimal price(BigDecimal value) {
-        return value.multiply(new BigDecimal(this.value));
+    BigDecimal price(Price price) {
+        return price.price(new BigDecimal(this.value));
     }
 }
