@@ -34,7 +34,7 @@ class CartBuilder {
 
             ProductBuilder and() {
                 PriceFactory priceFactory = new PriceFactory();
-                return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity)));
+                return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity)), Optional.ofNullable(unit));
             }
 
             Cart build() {
@@ -43,14 +43,15 @@ class CartBuilder {
 
             PriceBuilder withWeight(Weight.Unit unit) {
                 this.unit = unit;
-                return null;
+                return this;
             }
         }
 
         private String name;
         private Price price;
-        private int measure;
+        private double measure;
         private Weight.Unit unit;
+        private Optional<Weight.Unit> priceUnit;
 
         ProductBuilder withName(String name) {
             this.name = name;
@@ -61,8 +62,9 @@ class CartBuilder {
             return new PriceBuilder();
         }
 
-        private ProductBuilder withPrice(Price price) {
+        private ProductBuilder withPrice(Price price, Optional<Weight.Unit> unit) {
             this.price = price;
+            this.priceUnit = unit;
             return this;
         }
 
@@ -71,7 +73,7 @@ class CartBuilder {
             return this;
         }
 
-        ProductBuilder withWeight(int weight, Weight.Unit unit) {
+        ProductBuilder withWeight(double weight, Weight.Unit unit) {
             this.measure = weight;
             this.unit = unit;
             return this;
@@ -79,7 +81,8 @@ class CartBuilder {
 
         CartBuilder and() {
             MeasureFactory measureFactory = new MeasureFactory();
-            return CartBuilder.this.withProduct(new Product(name, price, measureFactory.create(measure, Optional.ofNullable(unit))));
+            Optional<MeasureFactory.WeightParam> unitParam = priceUnit.map(pu -> new MeasureFactory.WeightParam(this.unit, pu));
+            return CartBuilder.this.withProduct(new Product(name, price, measureFactory.create(measure, unitParam)));
         }
     }
 
