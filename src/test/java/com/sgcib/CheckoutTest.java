@@ -15,17 +15,17 @@ public class CheckoutTest {
      */
     @Test
     public void test_fixed_price() {
-        List<Product> products = asList(new Product("Can of beans", new Price(new BigDecimal("0.6")), new Quantity(1)));
+        List<Product> products = asList(new Product("Can of beans", new Price(new BigDecimal("0.6"), new Quantity(1)), new Quantity(1)));
         Cart cart = new Cart(products);
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("0.6"), totalPrice);
 
-        products = asList(new Product("Can of beans", new Price(new BigDecimal("0.6")), new Quantity(2)));
+        products = asList(new Product("Can of beans", new Price(new BigDecimal("0.6"), new Quantity(1)), new Quantity(2)));
         cart = new Cart(products);
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.2"), totalPrice);
 
-        products = asList(new Product("Can of beans", new Price(new BigDecimal("0.7")), new Quantity(3)));
+        products = asList(new Product("Can of beans", new Price(new BigDecimal("0.7"), new Quantity(1)), new Quantity(3)));
         cart = new Cart(products);
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("2.1"), totalPrice);

@@ -6,7 +6,7 @@ public class Price {
 
     private final BigDecimal value;
 
-    public Price(BigDecimal value) {
+    public Price(BigDecimal value, Quantity quantity) {
         this.value = value;
     }
 
