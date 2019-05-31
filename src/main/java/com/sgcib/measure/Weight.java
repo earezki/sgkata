@@ -20,16 +20,14 @@ public class Weight implements Measure {
 
         public Weight convertTo(double value, Unit target) {
             Double rate = this.table.get(target.name());
-            return new Weight(value * rate, target);
+            return new Weight(value * rate);
         }
     }
 
     private final double value;
-    private final Unit unit;
 
-    Weight(double value, Unit unit) {
+    private Weight(double value) {
         this.value = value;
-        this.unit = unit;
     }
 
     @Override
