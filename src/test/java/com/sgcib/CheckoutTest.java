@@ -46,6 +46,14 @@ public class CheckoutTest {
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.0"), totalPrice);
+
+        cart = new CartBuilder()
+                .withProduct().withName("Cookies").withQuantity(new Quantity(6))
+                .withPrice().withPrice(new BigDecimal("1.0")).withQuantity(new BigDecimal(3))
+                .build();
+        totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("2.0"), totalPrice);
+
     }
 
 
