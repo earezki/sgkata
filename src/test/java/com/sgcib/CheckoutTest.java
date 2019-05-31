@@ -31,5 +31,16 @@ public class CheckoutTest {
         assertEquals(new BigDecimal("2.1"), totalPrice);
     }
 
+    /**
+     * Three for a dollar (so what’s the price if I buy 4, or 5?)
+     */
+    @Test
+    public void test_variable_product_for_a_price() {
+        List<Product> products = asList(new Product("Cookies", new Price(new BigDecimal("1.0"), new Quantity(3)), new Quantity(3)));
+        Cart checkout = new Cart(products);
+        BigDecimal totalPrice = checkout.totalPrice();
+        assertEquals(new BigDecimal("1.0"), totalPrice);
+    }
+
 
 }
