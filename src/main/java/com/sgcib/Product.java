@@ -1,5 +1,8 @@
 package com.sgcib;
 
+import com.sgcib.price.Price;
+import com.sgcib.price.UnitPrice;
+
 import java.math.BigDecimal;
 
 public class Product {

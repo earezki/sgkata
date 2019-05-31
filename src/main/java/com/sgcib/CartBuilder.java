@@ -1,5 +1,8 @@
 package com.sgcib;
 
+import com.sgcib.price.Price;
+import com.sgcib.price.UnitPrice;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +29,11 @@ class CartBuilder {
             }
 
             ProductBuilder and() {
-                return ProductBuilder.this.withPrice(new Price(value, quantity));
+                return ProductBuilder.this.withPrice(new UnitPrice(value, quantity));
             }
 
             Cart build() {
-                ProductBuilder.this.withPrice(new Price(value, quantity));
-                return ProductBuilder.this.and().build();
+                return and().and().build();
             }
         }
 
