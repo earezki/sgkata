@@ -24,6 +24,11 @@ public class CheckoutTest {
         cart = new Cart(products);
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.2"), totalPrice);
+
+        products = asList(new Product("Can of beans", new Price(new BigDecimal("0.7")), new Quantity(3)));
+        cart = new Cart(products);
+        totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("2.1"), totalPrice);
     }
 
 
