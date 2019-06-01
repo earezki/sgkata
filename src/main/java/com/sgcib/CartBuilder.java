@@ -6,6 +6,7 @@ import com.sgcib.price.Price;
 import com.sgcib.price.PriceFactory;
 
 import java.math.BigDecimal;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,30 @@ class CartBuilder {
             PriceBuilder withWeight(Weight.Unit unit) {
                 this.unit = unit;
                 return this;
+            }
+
+            class BonusBuilder {
+
+                private int buy;
+                private int free;
+
+                BonusBuilder buy(int buy) {
+                    this.buy = buy;
+                    return this;
+                }
+
+                BonusBuilder free(int free) {
+                    this.free = free;
+                    return this;
+                }
+
+                Cart build() {
+                    return PriceBuilder.this.build();
+                }
+            }
+
+            BonusBuilder withBonus() {
+                return new BonusBuilder();
             }
         }
 

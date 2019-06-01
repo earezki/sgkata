@@ -90,5 +90,17 @@ public class CheckoutTest {
         assertEquals(new BigDecimal("0.4975"), totalPrice);
     }
 
+    /**
+     * buy two, get one free (so does the third item have a price?)
+     */
+    @Test
+    public void test_bonus_products() {
+        Cart cart = new CartBuilder()
+                .withProduct().withName("Capsule").withQuantity(3)
+                .withPrice().withPrice(new BigDecimal("1.0")).withBonus().buy(2).free(1)
+                .build();
+        BigDecimal totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("2.0"), totalPrice);
+    }
 
 }
