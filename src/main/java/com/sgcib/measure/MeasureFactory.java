@@ -1,26 +1,27 @@
 package com.sgcib.measure;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class MeasureFactory {
 
     static public class WeightParam {
-        private final Weight.Unit base;
-        private final Weight.Unit target;
+        private final WeightUnit base;
+        private final WeightUnit target;
 
-        public WeightParam(Weight.Unit base, Weight.Unit target) {
+        public WeightParam(WeightUnit base, WeightUnit target) {
             this.base = base;
             this.target = target;
         }
 
-        Weight weight(double value) {
+        Measure weight(double value) {
             return base.convertTo(value, target);
         }
     }
 
     public Measure create(double value, Optional<WeightParam> unit) {
         return unit.map(u -> weight(value, u))
-                .orElseGet(() -> new Quantity((int) value));
+                .orElseGet(() -> new Measure(new BigDecimal(value)));
     }
 
     private Measure weight(double value, WeightParam param) {

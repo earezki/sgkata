@@ -11,7 +11,7 @@ class UnitPrice implements Price {
     }
 
     @Override
-    public BigDecimal price(BigDecimal quantity) {
-        return this.value.multiply(quantity);
+    public BigDecimal price(BigDecimal measure) {
+        return this.value.multiply(measure);
     }
 }

@@ -4,8 +4,16 @@ import com.sgcib.price.Price;
 
 import java.math.BigDecimal;
 
-public interface Measure {
+public class Measure {
 
-    BigDecimal price(Price price);
+    private final BigDecimal value;
+
+    public Measure(BigDecimal value) {
+        this.value = value;
+    }
+
+    public BigDecimal price(Price price) {
+        return price.price(value);
+    }
 
 }

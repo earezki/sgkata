@@ -13,9 +13,13 @@ public class Bonus {
     }
 
     BigDecimal payableQuantity(BigDecimal quantity) {
-        int totalQuantity = this.buy + this.free;
-        BigDecimal divide = quantity.divide(new BigDecimal(totalQuantity), 0, BigDecimal.ROUND_DOWN);
-        BigDecimal remainder = quantity.remainder(new BigDecimal(totalQuantity));
+        BigDecimal totalQuantity = totalQuantity();
+        BigDecimal divide = quantity.divide(totalQuantity, 0, BigDecimal.ROUND_DOWN);
+        BigDecimal remainder = quantity.remainder(totalQuantity);
         return new BigDecimal(this.buy).multiply(divide).add(remainder);
+    }
+
+    private BigDecimal totalQuantity() {
+        return new BigDecimal(this.buy + this.free);
     }
 }

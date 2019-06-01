@@ -1,7 +1,7 @@
 package com.sgcib;
 
 import com.sgcib.measure.MeasureFactory;
-import com.sgcib.measure.Weight;
+import com.sgcib.measure.WeightUnit;
 import com.sgcib.price.Bonus;
 import com.sgcib.price.Price;
 import com.sgcib.price.PriceFactory;
@@ -21,7 +21,7 @@ class CartBuilder {
 
             private BigDecimal value;
             private BigDecimal quantity;
-            private Weight.Unit unit;
+            private WeightUnit weightUnit;
             private Optional<Bonus> bonusParam = Optional.empty();
 
             PriceBuilder withPrice(BigDecimal value) {
@@ -37,15 +37,15 @@ class CartBuilder {
             ProductBuilder and() {
                 PriceFactory priceFactory = new PriceFactory();
                 return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity), bonusParam),
-                        Optional.ofNullable(unit));
+                        Optional.ofNullable(weightUnit));
             }
 
             Cart build() {
                 return and().and().build();
             }
 
-            PriceBuilder withWeight(Weight.Unit unit) {
-                this.unit = unit;
+            PriceBuilder withWeight(WeightUnit weightUnit) {
+                this.weightUnit = weightUnit;
                 return this;
             }
 
@@ -86,8 +86,8 @@ class CartBuilder {
         private String name;
         private Price price;
         private double measure;
-        private Weight.Unit unit;
-        private Optional<Weight.Unit> priceUnit;
+        private WeightUnit weightUnit;
+        private Optional<WeightUnit> priceUnit;
 
         ProductBuilder withName(String name) {
             this.name = name;
@@ -98,7 +98,7 @@ class CartBuilder {
             return new PriceBuilder();
         }
 
-        private ProductBuilder withPrice(Price price, Optional<Weight.Unit> unit) {
+        private ProductBuilder withPrice(Price price, Optional<WeightUnit> unit) {
             this.price = price;
             this.priceUnit = unit;
             return this;
@@ -109,15 +109,15 @@ class CartBuilder {
             return this;
         }
 
-        ProductBuilder withWeight(double weight, Weight.Unit unit) {
+        ProductBuilder withWeight(double weight, WeightUnit weightUnit) {
             this.measure = weight;
-            this.unit = unit;
+            this.weightUnit = weightUnit;
             return this;
         }
 
         CartBuilder and() {
             MeasureFactory measureFactory = new MeasureFactory();
-            Optional<MeasureFactory.WeightParam> unitParam = priceUnit.map(pu -> new MeasureFactory.WeightParam(this.unit, pu));
+            Optional<MeasureFactory.WeightParam> unitParam = priceUnit.map(pu -> new MeasureFactory.WeightParam(this.weightUnit, pu));
             return CartBuilder.this.withProduct(new Product(name, price, measureFactory.create(measure, unitParam)));
         }
     }

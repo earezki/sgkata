@@ -13,13 +13,13 @@ class PackPrice implements Price {
     }
 
     @Override
-    public BigDecimal price(BigDecimal quantity) {
-        BigDecimal divide = quantity.divide(packQuantity, 0, BigDecimal.ROUND_DOWN);
-        BigDecimal remainder = quantity.remainder(packQuantity);
-        return origin.price(quantity(divide, remainder));
+    public BigDecimal price(BigDecimal measure) {
+        return origin.price(packQuantity(measure));
     }
 
-    private BigDecimal quantity(BigDecimal divide, BigDecimal remainder) {
+    private BigDecimal packQuantity(BigDecimal quantity) {
+        BigDecimal divide = quantity.divide(packQuantity, 0, BigDecimal.ROUND_DOWN);
+        BigDecimal remainder = quantity.remainder(packQuantity);
         return divide.add(remainder);
     }
 

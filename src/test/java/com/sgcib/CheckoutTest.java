@@ -1,6 +1,6 @@
 package com.sgcib;
 
-import com.sgcib.measure.Weight;
+import com.sgcib.measure.WeightUnit;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -76,15 +76,15 @@ public class CheckoutTest {
     @Test
     public void test_wighted_price() {
         Cart cart = new CartBuilder()
-                .withProduct().withName("Rice").withWeight(1, Weight.Unit.POUND)
-                .withPrice().withPrice(new BigDecimal("1.99")).withWeight(Weight.Unit.POUND)
+                .withProduct().withName("Rice").withWeight(1, WeightUnit.POUND)
+                .withPrice().withPrice(new BigDecimal("1.99")).withWeight(WeightUnit.POUND)
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("1.99"), totalPrice);
 
         cart = new CartBuilder()
-                .withProduct().withName("Rice").withWeight(4, Weight.Unit.OUNCE)
-                .withPrice().withPrice(new BigDecimal("1.99")).withWeight(Weight.Unit.POUND)
+                .withProduct().withName("Rice").withWeight(4, WeightUnit.OUNCE)
+                .withPrice().withPrice(new BigDecimal("1.99")).withWeight(WeightUnit.POUND)
                 .build();
         totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("0.4975"), totalPrice);
