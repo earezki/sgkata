@@ -101,6 +101,13 @@ public class CheckoutTest {
                 .build();
         BigDecimal totalPrice = cart.totalPrice();
         assertEquals(new BigDecimal("2.0"), totalPrice);
+
+        cart = new CartBuilder()
+                .withProduct().withName("Capsule").withQuantity(6)
+                .withPrice().withPrice(new BigDecimal("1.0")).withBonus().buy(2).free(1)
+                .build();
+        totalPrice = cart.totalPrice();
+        assertEquals(new BigDecimal("4.0"), totalPrice);
     }
 
 }
