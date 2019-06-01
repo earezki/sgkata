@@ -5,10 +5,15 @@ import java.util.Optional;
 
 public class PriceFactory {
 
-    public Price create(BigDecimal value, Optional<BigDecimal> packQuantity) {
-        return packQuantity
-                .map(quantity -> pack(value, quantity))
-                .orElseGet(() -> new UnitPrice(value));
+    public Price create(BigDecimal value, Optional<BigDecimal> packQuantity, Optional<Bonus> bonusParam) {
+        return bonusParam.map(bonus -> bonus(value, bonus))
+                .orElseGet(() -> packQuantity
+                        .map(quantity -> pack(value, quantity))
+                        .orElseGet(() -> new UnitPrice(value)));
+    }
+
+    private Price bonus(BigDecimal value, Bonus bonus) {
+        return new BonusPrice(new UnitPrice(value), bonus);
     }
 
     private Price pack(BigDecimal value, BigDecimal packQuantity) {

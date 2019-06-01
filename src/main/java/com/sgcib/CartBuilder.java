@@ -2,11 +2,11 @@ package com.sgcib;
 
 import com.sgcib.measure.MeasureFactory;
 import com.sgcib.measure.Weight;
+import com.sgcib.price.Bonus;
 import com.sgcib.price.Price;
 import com.sgcib.price.PriceFactory;
 
 import java.math.BigDecimal;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +22,7 @@ class CartBuilder {
             private BigDecimal value;
             private BigDecimal quantity;
             private Weight.Unit unit;
+            private Optional<Bonus> bonusParam = Optional.empty();
 
             PriceBuilder withPrice(BigDecimal value) {
                 this.value = value;
@@ -35,7 +36,8 @@ class CartBuilder {
 
             ProductBuilder and() {
                 PriceFactory priceFactory = new PriceFactory();
-                return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity)), Optional.ofNullable(unit));
+                return ProductBuilder.this.withPrice(priceFactory.create(value, Optional.ofNullable(quantity), bonusParam),
+                        Optional.ofNullable(unit));
             }
 
             Cart build() {
@@ -62,9 +64,18 @@ class CartBuilder {
                     return this;
                 }
 
-                Cart build() {
-                    return PriceBuilder.this.build();
+                PriceBuilder and() {
+                    return PriceBuilder.this.withBonus(buy, free);
                 }
+
+                Cart build() {
+                    return and().build();
+                }
+            }
+
+            private PriceBuilder withBonus(int buy, int free) {
+                this.bonusParam = Optional.of(new Bonus(buy, free));
+                return this;
             }
 
             BonusBuilder withBonus() {
