@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-public class CheckoutTest {
+public class CartTest {
 
     /**
      * This can of beans costs $0.65
