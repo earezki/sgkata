@@ -1,0 +1,2 @@
+# sgkata
+Supermarket Pricing exercice
