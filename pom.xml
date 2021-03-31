@@ -22,7 +22,7 @@
     </build>
 
     <properties>
-        <guava.version>27.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <junit.version>4.12</junit.version>
     </properties>
 
